@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<NineML xmlns="http://www.shef.ac.uk/NineMLUserLayer" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.shef.ac.uk/NineMLUserLayer NineMLUserLayer.xsd">
+	<Population>
+		<Neuron name="Excitatory" size="3200" url="Integrate_and_fire.xml">
+			<Property name="t_refractory" dimension="??">
+				<FixedValue value="0.005"/>
+			</Property>
+			<Property name="v_threshold" dimension="??">
+				<FixedValue value="-50"/>
+			</Property>
+			<Property name="v_rest" dimension="??">
+				<FixedValue value="-49"/>
+			</Property>
+			<Property name="v_reset" dimension="??">
+				<ValueList>
+					<Value index="0" value="22"/>
+				</ValueList>
+			</Property>
+			<Property name="tau_m" dimension="??">
+				<FixedValue value="0.02"/>
+			</Property>
+			<Property name="c_m" dimension="??">
+				<FixedValue value="0.2"/>
+			</Property>
+			<Property name="V" dimension="??">
+				<UniformDistribution minimum="-60" maximum="-50"/>
+			</Property>
+			<Property name="counter" dimension="??">
+				<FixedValue value="0"/>
+			</Property>
+		</Neuron>
+		<Projection dst_population="Inhibitory">
+			<Collateral>
+				<FixedProbabilityConnection probability="0.02" seed="123">
+					<Delay>
+						<FixedValue value="0.1"/>
+					</Delay>
+				</FixedProbabilityConnection>
+				<Synapse name="E_to_I_syn" url="fixed_weight.xml" input_src_port="spike" input_dst_port="spike">
+					<Property name="w" dimension="??">
+						<FixedValue value="0.016"/>
+					</Property>
+					<Property name="out" dimension="??">
+						<FixedValue value="0"/>
+					</Property>
+				</Synapse>
+				<PostSynapse name="E_to_I_psp" url="Current_exp_synapse.xml" input_src_port="PSP" input_dst_port="PSP" output_src_port="ISyn" output_dst_port="I_syn">
+					<Property name="tau_synapse" dimension="??">
+						<FixedValue value="0.005"/>
+					</Property>
+					<Property name="oldPSP" dimension="??">
+						<FixedValue value="0"/>
+					</Property>
+					<Property name="h" dimension="??">
+						<FixedValue value="0"/>
+					</Property>
+				</PostSynapse>
+			</Collateral>
+		</Projection>
+		<Projection dst_population="Excitatory">
+			<Collateral>
+				<FixedProbabilityConnection probability="0.02" seed="123">
+					<Delay>
+						<FixedValue value="0.1"/>
+					</Delay>
+				</FixedProbabilityConnection>
+				<Synapse name="E_to_E_syn" url="fixed_weight.xml" input_src_port="spike" input_dst_port="spike">
+					<Property name="w" dimension="??">
+						<FixedValue value="0.016"/>
+					</Property>
+					<Property name="out" dimension="??">
+						<FixedValue value="0"/>
+					</Property>
+				</Synapse>
+				<PostSynapse name="E_to_E_psp" url="Current_exp_synapse.xml" input_src_port="PSP" input_dst_port="PSP" output_src_port="ISyn" output_dst_port="I_syn">
+					<Property name="tau_synapse" dimension="??">
+						<FixedValue value="0.005"/>
+					</Property>
+					<Property name="oldPSP" dimension="??">
+						<FixedValue value="0"/>
+					</Property>
+					<Property name="h" dimension="??">
+						<FixedValue value="0"/>
+					</Property>
+				</PostSynapse>
+			</Collateral>
+		</Projection>	
+	</Population>
+	<Population>
+		<Neuron name="Inhibitory" size="800" url="Integrate_and_fire.xml">
+			<Property name="t_refractory" dimension="??">
+				<FixedValue value="0.005"/>
+			</Property>
+			<Property name="v_threshold" dimension="??">
+				<FixedValue value="-50"/>
+			</Property>
+			<Property name="v_rest" dimension="??">
+				<FixedValue value="-49"/>
+			</Property>
+			<Property name="v_reset" dimension="??">
+				<FixedValue value="-60"/>
+			</Property>
+			<Property name="tau_m" dimension="??">
+				<FixedValue value="0.02"/>
+			</Property>
+			<Property name="c_m" dimension="??">
+				<FixedValue value="0.2"/>
+			</Property>
+			<Property name="V" dimension="??">
+				<UniformDistribution minimum="-60" maximum="-50"/>
+			</Property>
+			<Property name="counter" dimension="??">
+				<FixedValue value="0"/>
+			</Property>
+		</Neuron>
+		<Projection dst_population="Excitatory">
+			<Collateral>
+				<FixedProbabilityConnection probability="0.02" seed="123">
+					<Delay>
+						<FixedValue value="0.1"/>
+					</Delay>
+				</FixedProbabilityConnection>
+				<Synapse name="I_to_E_syn" url="fixed_weight.xml" input_src_port="spike" input_dst_port="spike">
+					<Property name="w" dimension="??">
+						<FixedValue value="0.016"/>
+					</Property>
+					<Property name="out" dimension="??">
+						<FixedValue value="0"/>
+					</Property>
+				</Synapse>
+				<PostSynapse name="I_to_E_psp" url="Current_exp_synapse.xml" input_src_port="PSP" input_dst_port="PSP" output_src_port="ISyn" output_dst_port="I_syn">
+					<Property name="tau_synapse" dimension="??">
+						<FixedValue value="0.005"/>
+					</Property>
+					<Property name="oldPSP" dimension="??">
+						<FixedValue value="0"/>
+					</Property>
+					<Property name="h" dimension="??">
+						<FixedValue value="0"/>
+					</Property>
+				</PostSynapse>
+			</Collateral>
+		</Projection>
+		<Projection dst_population="Inhibitory">
+			<Collateral>
+				<FixedProbabilityConnection probability="0.02" seed="123">
+					<Delay>
+						<FixedValue value="0.1"/>
+					</Delay>
+				</FixedProbabilityConnection>
+				<Synapse name="I_to_I_syn" url="fixed_weight.xml" input_src_port="spike" input_dst_port="spike">
+					<Property name="w" dimension="??">
+						<FixedValue value="0.016"/>
+					</Property>
+					<Property name="out" dimension="??">
+						<FixedValue value="0"/>
+					</Property>
+				</Synapse>
+				<PostSynapse name="I_to_I_psp" url="Current_exp_synapse.xml" input_src_port="PSP" input_dst_port="PSP" output_src_port="ISyn" output_dst_port="I_syn">
+					<Property name="tau_synapse" dimension="??">
+						<FixedValue value="0.005"/>
+					</Property>
+					<Property name="oldPSP" dimension="??">
+						<FixedValue value="0"/>
+					</Property>
+					<Property name="h" dimension="??">
+						<FixedValue value="0"/>
+					</Property>
+				</PostSynapse>
+			</Collateral>
+		</Projection>	
+	</Population>
+</NineML>
