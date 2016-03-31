@@ -145,7 +145,7 @@ void SpineMLSplitter::parseExperimentNetwork(Experiment* experiment, QString net
 
 void SpineMLSplitter::parseExperimentFile(QString experiment_input_filename, QString network_output_filename)
 {
-    Experiment *experiment;
+    Experiment *experiment = (Experiment*)0;
 
     if (PARSER_DEBUG_OUTPUT)
         qDebug() << "*** Start Experiment Parsing";
@@ -181,8 +181,9 @@ void SpineMLSplitter::parseExperimentFile(QString experiment_input_filename, QSt
 
     //parse and split the network
     parseExperimentNetwork(experiment, network_output_filename);
-    delete experiment;
-
+    if (experiment != (Experiment*)0) {
+        delete experiment;
+    }
 }
 
 void SpineMLSplitter::parseAndSplitPopulations()
@@ -629,7 +630,7 @@ void SpineMLSplitter::splitProjections(Population *population, Population *sub_p
 
                             //calculate target sub population size
                             uint target_sub_pop_size = MAX_POPULATION_SIZE;
-                            if (d == (target_sub_pop_count-1)){
+                            if (d == static_cast<int>((target_sub_pop_count-1))){
                                 uint r = target_pop_size % MAX_POPULATION_SIZE;
                                 if (r != 0)
                                     target_sub_pop_size = r;

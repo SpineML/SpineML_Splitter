@@ -63,6 +63,7 @@ class ComponentInfo
 {
 public:
     ComponentInfo(){ size = 0;}
+    virtual ~ComponentInfo(){};
     virtual ComponentType Type() = 0;
     virtual void calculateDimensions(QHash<QString, ComponentInfo *> &component_info) = 0;
 public:
@@ -75,6 +76,7 @@ class PopulationInfo: public ComponentInfo
 {
 public:
     PopulationInfo(){}
+    virtual ~PopulationInfo(){}
     ComponentType Type(){return COMPONENT_TYPE_POPULATION;}
     void calculateDimensions(QHash<QString, ComponentInfo *> &component_info);
 public:
@@ -87,6 +89,7 @@ class WeightUpdateInfo: public ComponentInfo
 {
 public:
     WeightUpdateInfo(){}
+    virtual ~WeightUpdateInfo(){}
     ComponentType Type(){return COMPONENT_TYPE_WEIGHT_UPDATE;}
     void calculateDimensions(QHash<QString, ComponentInfo *> &component_info);
 public:
@@ -101,6 +104,7 @@ class PostsynapseInfo: public ComponentInfo
 {
 public:
     PostsynapseInfo(){}
+    virtual ~PostsynapseInfo(){}
     ComponentType Type(){return COMPONENT_TYPE_POSTSYNAPSE;}
     void calculateDimensions(QHash<QString, ComponentInfo *> &component_info);
 public:
@@ -141,6 +145,7 @@ class Neuron: public Component
 {
 public:
     Neuron(){}
+    virtual ~Neuron(){}
     ComponentType Type(){return COMPONENT_TYPE_POPULATION;}
 public:
     uint size;
@@ -274,6 +279,7 @@ class WeightUpdate: public Component
 {
 public:
     WeightUpdate(){}
+    virtual ~WeightUpdate(){}
     ComponentType Type(){return COMPONENT_TYPE_WEIGHT_UPDATE;}
     static QString unsplitName(QString split_name);
 public:
@@ -286,6 +292,7 @@ class Postsynapse: public Component
 {
 public:
     Postsynapse(){}
+    virtual ~Postsynapse(){}
     ComponentType Type(){return COMPONENT_TYPE_POSTSYNAPSE;}
 public:
     QString input_src_port;

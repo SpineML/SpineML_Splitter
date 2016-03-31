@@ -1,7 +1,7 @@
 #ifndef SPINEMLSPLITTER_H
 #define SPINEMLSPLITTER_H
 
-#include <QtXml/QXmlStreamReader>
+#include <QXmlStreamReader>
 #include <QHash>
 #include <QFile>
 #include <QElapsedTimer>

@@ -3,3 +3,8 @@ with up to date versions of SpineML.
 
 Essentially a continuation of Paul Richmond's development on this
 software.
+
+To compile:
+
+qmake -o Makefile splitter.pro
+make

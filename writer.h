@@ -15,6 +15,7 @@ class SpineMLWriter
 {
 public:
     SpineMLWriter(QString output_filename);
+    virtual ~SpineMLWriter(){}
 
     virtual void writeDocumentStart() = 0;
     virtual void writeDocuemntEnd() = 0;
